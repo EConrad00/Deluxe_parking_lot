@@ -8,10 +8,11 @@ namespace Deluxe_parking_lot
 {
     internal class Helper
     {
-        public void CreateLot()
+        public ParkingLot CreateLot()
         {
-            List<Vehicle> vehicles = new List<Vehicle>();
-            ParkingLot parkingLot = new ParkingLot(vehicles);
+            List<Vehicle> vehicles = [];
+            ParkingLot parkingLot = new (vehicles);
+            return parkingLot;
         }
     }
 }
