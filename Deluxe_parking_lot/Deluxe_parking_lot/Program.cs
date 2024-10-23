@@ -11,6 +11,8 @@ internal class MainProgram
     {
         Helper helper = new Helper();
         ParkingLot parking_lot = helper.CreateLot();
+        helper.CreateVehicle(parking_lot);
+        //helper.CreateVehicle();
         while (true)
         {
             Console.WriteLine("[T]Test code\r\n" + "[E]xit\r\n");
@@ -19,7 +21,8 @@ internal class MainProgram
             {
                 case "T":
                     Console.Clear();
-                    Console.WriteLine($"{parking_lot.SizeOfParkingLot}");
+                    //Console.WriteLine($"{carA.RegNumber} {carA.Colour} {carA.Electric}");
+                    helper.DisplayCurrentLot( parking_lot );
                     break;
                 case "E":
                     Console.Clear();

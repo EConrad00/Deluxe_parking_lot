@@ -8,26 +8,26 @@ namespace Deluxe_parking_lot
 {
     public abstract class Vehicle
     {
-        public double Size {  get; set; }
+        public double Size { get; set; }
 
         public string RegNumber { get; set; }
 
         public string Colour { get; set; }
 
-        public Vehicle(double size, string regNumber, string colour) 
+        public Vehicle(string regNumber, string colour) 
         {
-            Size = size;
             RegNumber = regNumber; 
             Colour = colour;
         }
     }
 
+
     public class Car : Vehicle
     {
         public bool Electric { get; set; }
-        public Car(double size, string regNumber, string colour, bool electric) : base(size, regNumber, colour) 
+        public Car(string regNumber, string colour, bool electric) : base(regNumber, colour)
         {
-            size = 1;
+            Size = 1;
             Electric = electric;
         }
     }
@@ -35,9 +35,9 @@ namespace Deluxe_parking_lot
     public class Buss : Vehicle
     {
         public int AmountOfPassengers { get; set; }
-        public Buss(double size, string regNumber, string colour, int amountOfPassengers) : base(size, regNumber, colour)
+        public Buss(string regNumber, string colour, int amountOfPassengers) : base(regNumber, colour)
         {
-            size = 2;
+            Size = 2;
             AmountOfPassengers = amountOfPassengers;
         }
     }
@@ -45,9 +45,9 @@ namespace Deluxe_parking_lot
     public class Motorcycle : Vehicle
     {
         public string KindOfMC { get; set; }
-        public Motorcycle(double size, string regNumber, string colour, string kindOfMC) : base(size, regNumber, colour)
+        public Motorcycle(string regNumber, string colour, string kindOfMC) : base(regNumber, colour)
         {
-            size = 0.5;
+            Size = 0.5;
             KindOfMC = kindOfMC;
         }
     }
