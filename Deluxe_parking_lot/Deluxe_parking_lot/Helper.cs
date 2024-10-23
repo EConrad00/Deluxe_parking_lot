@@ -35,15 +35,23 @@ namespace Deluxe_parking_lot
         }
         public ParkingLot CreateVehicle(ParkingLot parkingLot) 
         {
-            
+            int randvalue = rnd.Next(0, 3);
 
-            Car carA = new Car(CreateRegNumber(),"Red", false);
-            Buss bussA = new Buss(CreateRegNumber(), "Blue", 43);
-            Motorcycle motorcycleA = new Motorcycle(CreateRegNumber(), "Grey", "Harley");
-            
-            parkingLot.Vehicles.Add(carA);
-            parkingLot.Vehicles.Add(bussA);
-            parkingLot.Vehicles.Add(motorcycleA);
+            if (randvalue == 0)
+            {
+                Car carA = new Car(CreateRegNumber(), "Red", false);
+                parkingLot.Vehicles.Add(carA);
+            }
+            else if (randvalue == 1)
+            {
+                Buss bussA = new Buss(CreateRegNumber(), "Blue", 43);
+                parkingLot.Vehicles.Add(bussA);
+            }
+            else if (randvalue == 2) 
+            {
+                Motorcycle motorcycleA = new Motorcycle(CreateRegNumber(), "Grey", "Harley");
+                parkingLot.Vehicles.Add(motorcycleA);
+            }
 
             return parkingLot;
         }
@@ -52,7 +60,7 @@ namespace Deluxe_parking_lot
         {
             int i = 0;
             int motorcycleCount = 0;
-            int currentAmountOfMC = 0;
+            decimal currentAmountOfMC = 0;
             foreach (var vehicle in parkingLot.Vehicles)
             {
                 i++;
@@ -89,10 +97,10 @@ namespace Deluxe_parking_lot
                 }
 
             }
-            for(; i < 15 + (currentAmountOfMC / 2);)
+            for(; i < 15 + (Math.Round((currentAmountOfMC / 2),MidpointRounding.ToEven));)
             {
                 i++;
-                Console.WriteLine($"Spot {i} empty");
+                Console.WriteLine($"Spot {i - (Math.Round((currentAmountOfMC / 2), MidpointRounding.ToEven))} empty");
             }
         }
     }
