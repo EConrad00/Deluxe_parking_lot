@@ -8,6 +8,7 @@ namespace Deluxe_parking_lot
 {
     internal class Helper
     {
+        Random rnd = new Random();
         public ParkingLot CreateLot()
         {
             List<Vehicle> vehicles = [];
@@ -15,11 +16,30 @@ namespace Deluxe_parking_lot
             return parkingLot;
         }
 
+        private string CreateRegNumber()
+        {
+            string regNr = "";
+            int randValue;
+            for (int i = 0; i < 3; i++)
+            {
+                randValue = rnd.Next(0, 26);
+                regNr += Convert.ToChar(randValue + 65);
+            }
+            for (int i = 0; i < 3; i++) 
+            {
+                randValue = rnd.Next(0, 10);
+                regNr += randValue.ToString();
+            }
+
+            return regNr;
+        }
         public ParkingLot CreateVehicle(ParkingLot parkingLot) 
         {
-            Car carA = new Car("abc123","Red", false);
-            Buss bussA = new Buss("xyz789", "Blue", 43);
-            Motorcycle motorcycleA = new Motorcycle("shd235", "Grey", "Harley");
+            
+
+            Car carA = new Car(CreateRegNumber(),"Red", false);
+            Buss bussA = new Buss(CreateRegNumber(), "Blue", 43);
+            Motorcycle motorcycleA = new Motorcycle(CreateRegNumber(), "Grey", "Harley");
             
             parkingLot.Vehicles.Add(carA);
             parkingLot.Vehicles.Add(bussA);
@@ -34,15 +54,15 @@ namespace Deluxe_parking_lot
             foreach (var vehicle in parkingLot.Vehicles)
             {
                 i++;
-                if (vehicle == ((Car)vehicle))
+                if (vehicle is Car)
                 {
                     Console.WriteLine($"Spot{i} {vehicle.RegNumber} {vehicle.Colour} {((Car)vehicle).Electric}");
                 }
-                else if (vehicle == ((Buss)vehicle))
+                else if (vehicle is Buss)
                 {
                     Console.WriteLine($"Spot{i} {vehicle.RegNumber} {vehicle.Colour} {((Buss)vehicle).AmountOfPassengers}");
                 }
-                else if(vehicle == ((Motorcycle)vehicle))
+                else if(vehicle is Motorcycle)
                 {
                     Console.WriteLine($"Spot{i} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
                 }
