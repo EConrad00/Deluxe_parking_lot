@@ -24,25 +24,31 @@ namespace Deluxe_parking_lot
 
     public class Car : Vehicle
     {
-        public Car(double size, string regNumber, string colour) : base(size, regNumber, colour) 
+        public bool Electric { get; set; }
+        public Car(double size, string regNumber, string colour, bool electric) : base(size, regNumber, colour) 
         {
             size = 1;
+            Electric = electric;
         }
     }
 
     public class Buss : Vehicle
     {
-        public Buss(double size, string regNumber, string colour) : base(size, regNumber, colour)
+        public int AmountOfPassengers { get; set; }
+        public Buss(double size, string regNumber, string colour, int amountOfPassengers) : base(size, regNumber, colour)
         {
             size = 2;
+            AmountOfPassengers = amountOfPassengers;
         }
     }
 
     public class Motorcycle : Vehicle
     {
-        public Motorcycle(double size, string regNumber, string colour) : base(size, regNumber, colour)
+        public string KindOfMC { get; set; }
+        public Motorcycle(double size, string regNumber, string colour, string kindOfMC) : base(size, regNumber, colour)
         {
             size = 0.5;
+            KindOfMC = kindOfMC;
         }
     }
 }
