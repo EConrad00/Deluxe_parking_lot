@@ -51,26 +51,48 @@ namespace Deluxe_parking_lot
         public void DisplayCurrentLot(ParkingLot parkingLot)
         {
             int i = 0;
+            int motorcycleCount = 0;
+            int currentAmountOfMC = 0;
             foreach (var vehicle in parkingLot.Vehicles)
             {
                 i++;
                 if (vehicle is Car)
                 {
-                    Console.WriteLine($"Spot{i} {vehicle.RegNumber} {vehicle.Colour} {((Car)vehicle).Electric}");
+                    Console.WriteLine($"Spot {i} {vehicle.RegNumber} {vehicle.Colour} {((Car)vehicle).Electric}");
+                    motorcycleCount = 0;
                 }
                 else if (vehicle is Buss)
                 {
-                    Console.WriteLine($"Spot{i} {vehicle.RegNumber} {vehicle.Colour} {((Buss)vehicle).AmountOfPassengers}");
+                    Console.WriteLine($"Spot {i}-{i + 1} {vehicle.RegNumber} {vehicle.Colour} {((Buss)vehicle).AmountOfPassengers}");
+                    i++;
+                    motorcycleCount = 0;
                 }
                 else if(vehicle is Motorcycle)
                 {
-                    Console.WriteLine($"Spot{i} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
+                    motorcycleCount++;
+                    currentAmountOfMC++;
+                    if (motorcycleCount == 2)
+                    {
+                        Console.WriteLine($"Spot {i - 1} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
+                        //i--;
+                        motorcycleCount = 0;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Spot {i} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine($"Spot {i}");
+                    Console.WriteLine($"Spot {i} empty");
+                    motorcycleCount = 0;
                 }
 
+            }
+            for(; i < 15 + (currentAmountOfMC / 2);)
+            {
+                i++;
+                Console.WriteLine($"Spot {i} empty");
             }
         }
     }

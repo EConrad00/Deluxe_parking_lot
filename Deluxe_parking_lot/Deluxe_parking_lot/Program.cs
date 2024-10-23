@@ -12,7 +12,6 @@ internal class MainProgram
         Helper helper = new Helper();
         ParkingLot parking_lot = helper.CreateLot();
         helper.CreateVehicle(parking_lot);
-        //helper.CreateVehicle();
         while (true)
         {
             Console.WriteLine("[T]Test code\r\n" + "[E]xit\r\n");
