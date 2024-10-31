@@ -29,6 +29,7 @@ internal class MainProgram
                     }
                     else
                     {
+                        helper.CheckOut(parking_lot);
                         helper.DisplayCurrentLot(parking_lot);
                         Console.WriteLine($"Parkinlot is full {helper.CurrentSize}");
                     }

@@ -60,6 +60,12 @@ namespace Deluxe_parking_lot
 
         }
 
+        public void CheckOut(ParkingLot parkingLot)
+        {
+            CurrentSize = (CurrentSize - parkingLot.Vehicles[4].Size);
+            parkingLot.Vehicles.RemoveAt(4);
+        }
+
         public void DisplayCurrentLot(ParkingLot parkingLot)
         {
             int i = 0;

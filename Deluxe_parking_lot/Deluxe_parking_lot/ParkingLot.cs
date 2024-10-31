@@ -11,7 +11,7 @@ namespace Deluxe_parking_lot
         public double SizeOfParkingLot { get; }
 
         public List<Vehicle> Vehicles { get; set; }
-        public ParkingLot(/*List<Vehicle> vehicles*/)
+        public ParkingLot()
         {
             SizeOfParkingLot = 15;
             Vehicles = new List<Vehicle>();
