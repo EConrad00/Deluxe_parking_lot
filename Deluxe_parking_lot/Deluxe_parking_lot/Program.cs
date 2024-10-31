@@ -10,7 +10,8 @@ internal class MainProgram
     static void Main(string[] args) 
     {
         Helper helper = new Helper();
-        ParkingLot parking_lot = helper.CreateLot();
+        //ParkingLot parking_lot = helper.CreateLot();
+        ParkingLot parking_lot = new ParkingLot();
         while (true)
         {
             Console.WriteLine("[T]Test code\r\n" + "[E]xit\r\n");
@@ -20,8 +21,18 @@ internal class MainProgram
                 case "T":
                     Console.Clear();
                     //Console.WriteLine($"{carA.RegNumber} {carA.Colour} {carA.Electric}");
-                    helper.CreateVehicle(parking_lot);
-                    helper.DisplayCurrentLot( parking_lot );
+                    if(parking_lot.SizeOfParkingLot > helper.CurrentSize)
+                    {
+                        helper.CreateVehicle(parking_lot);
+                        helper.DisplayCurrentLot(parking_lot);
+                        Console.WriteLine($"Parkinlot is this full {helper.CurrentSize}");
+                    }
+                    else
+                    {
+                        helper.DisplayCurrentLot(parking_lot);
+                        Console.WriteLine($"Parkinlot is full {helper.CurrentSize}");
+                    }
+                    
                     break;
                 case "E":
                     Console.Clear();

@@ -9,12 +9,14 @@ namespace Deluxe_parking_lot
     internal class Helper
     {
         Random rnd = new Random();
-        public ParkingLot CreateLot()
-        {
-            List<Vehicle> vehicles = [];
-            ParkingLot parkingLot = new (vehicles);
-            return parkingLot;
-        }
+
+        public double CurrentSize { get; set; }
+        //public ParkingLot CreateLot()
+        //{
+        //    List<Vehicle> vehicles = [];
+        //    ParkingLot parkingLot = new (vehicles);
+        //    return parkingLot;
+        //}
 
         private string CreateRegNumber()
         {
@@ -33,7 +35,7 @@ namespace Deluxe_parking_lot
 
             return regNr;
         }
-        public ParkingLot CreateVehicle(ParkingLot parkingLot) 
+        public void CreateVehicle(ParkingLot parkingLot) 
         {
             int randvalue = rnd.Next(0, 3);
 
@@ -41,19 +43,21 @@ namespace Deluxe_parking_lot
             {
                 Car carA = new Car(CreateRegNumber(), "Red", false);
                 parkingLot.Vehicles.Add(carA);
+                CurrentSize = (CurrentSize + carA.Size);
             }
             else if (randvalue == 1)
             {
                 Buss bussA = new Buss(CreateRegNumber(), "Blue", 43);
                 parkingLot.Vehicles.Add(bussA);
+                CurrentSize = (CurrentSize + bussA.Size);
             }
             else if (randvalue == 2) 
             {
                 Motorcycle motorcycleA = new Motorcycle(CreateRegNumber(), "Grey", "Harley");
                 parkingLot.Vehicles.Add(motorcycleA);
+                CurrentSize = (CurrentSize + motorcycleA.Size);
             }
 
-            return parkingLot;
         }
 
         public void DisplayCurrentLot(ParkingLot parkingLot)
@@ -67,6 +71,7 @@ namespace Deluxe_parking_lot
                 if (vehicle is Car)
                 {
                     Console.WriteLine($"Spot {i} {vehicle.RegNumber} {vehicle.Colour} {((Car)vehicle).Electric}");
+                    //i++;
                     motorcycleCount = 0;
                 }
                 else if (vehicle is Buss)
@@ -82,19 +87,23 @@ namespace Deluxe_parking_lot
                     if (motorcycleCount == 2)
                     {
                         Console.WriteLine($"Spot {i - 1} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
-                        //i--;
+                        i--;
                         motorcycleCount = 0;
                     }
                     else
                     {
                         Console.WriteLine($"Spot {i} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
+                        //i++;
                     }
                 }
                 else
                 {
+                    //i++;
                     Console.WriteLine($"Spot {i} empty");
+                    //i--;
                     motorcycleCount = 0;
                 }
+                //i++;
 
             }
             for(; i < 15 + (Math.Round((currentAmountOfMC / 2),MidpointRounding.ToEven));)
