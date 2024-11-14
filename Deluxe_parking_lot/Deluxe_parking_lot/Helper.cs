@@ -18,18 +18,18 @@ namespace Deluxe_parking_lot
         //    return parkingLot;
         //}
 
-        private string CreateRegNumber()
+        public static string CreateRegNumber()
         {
             string regNr = "";
             int randValue;
             for (int i = 0; i < 3; i++)
             {
-                randValue = rnd.Next(0, 26);
+                randValue = Random.Shared.Next(0, 26);
                 regNr += Convert.ToChar(randValue + 65);
             }
             for (int i = 0; i < 3; i++) 
             {
-                randValue = rnd.Next(0, 10);
+                randValue = Random.Shared.Next(0, 10);
                 regNr += randValue.ToString();
             }
 
