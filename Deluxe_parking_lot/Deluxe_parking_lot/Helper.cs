@@ -10,7 +10,7 @@ namespace Deluxe_parking_lot
     {
         Random rnd = new Random();
 
-        public double CurrentSize { get; set; }
+        //public double CurrentSize { get; set; }
         //public ParkingLot CreateLot()
         //{
         //    List<Vehicle> vehicles = [];
@@ -35,88 +35,81 @@ namespace Deluxe_parking_lot
 
             return regNr;
         }
-        public void CreateVehicle(ParkingLot parkingLot) 
-        {
-            int randvalue = rnd.Next(0, 3);
+        //public void CreateVehicle(ParkingLot parkingLot) 
+        //{
+        //    int randvalue = rnd.Next(0, 3);
 
-            if (randvalue == 0)
-            {
-                Car carA = new Car(CreateRegNumber(), "Red", false);
-                parkingLot.Vehicles.Add(carA);
-                CurrentSize = (CurrentSize + carA.Size);
-            }
-            else if (randvalue == 1)
-            {
-                Buss bussA = new Buss(CreateRegNumber(), "Blue", 43);
-                parkingLot.Vehicles.Add(bussA);
-                CurrentSize = (CurrentSize + bussA.Size);
-            }
-            else if (randvalue == 2) 
-            {
-                Motorcycle motorcycleA = new Motorcycle(CreateRegNumber(), "Grey", "Harley");
-                parkingLot.Vehicles.Add(motorcycleA);
-                CurrentSize = (CurrentSize + motorcycleA.Size);
-            }
+        //    if (randvalue == 0)
+        //    {
+        //        Car carA = new Car(CreateRegNumber(), "Red", false);
+        //        parkingLot.Vehicles.Add(carA);
+        //        CurrentSize = (CurrentSize + carA.Size);
+        //    }
+        //    else if (randvalue == 1)
+        //    {
+        //        Buss bussA = new Buss(CreateRegNumber(), "Blue", 43);
+        //        parkingLot.Vehicles.Add(bussA);
+        //        CurrentSize = (CurrentSize + bussA.Size);
+        //    }
+        //    else if (randvalue == 2) 
+        //    {
+        //        Motorcycle motorcycleA = new Motorcycle(CreateRegNumber(), "Grey", "Harley");
+        //        parkingLot.Vehicles.Add(motorcycleA);
+        //        CurrentSize = (CurrentSize + motorcycleA.Size);
+        //    }
 
-        }
+        //}
 
         public void CheckOut(ParkingLot parkingLot)
         {
-            CurrentSize = (CurrentSize - parkingLot.Vehicles[4].Size);
+            parkingLot.CurrentSize = (parkingLot.CurrentSize - parkingLot.Vehicles[4].Size);
             parkingLot.Vehicles.RemoveAt(4);
+            parkingLot.AvailableSpots[8] = 0;
         }
 
         public void DisplayCurrentLot(ParkingLot parkingLot)
         {
             int i = 0;
-            int motorcycleCount = 0;
-            decimal currentAmountOfMC = 0;
+            //int motorcycleCount = 0;
+            //decimal currentAmountOfMC = 0;
             foreach (var vehicle in parkingLot.Vehicles)
             {
                 i++;
                 if (vehicle is Car)
                 {
-                    Console.WriteLine($"Spot {i} {vehicle.RegNumber} {vehicle.Colour} {((Car)vehicle).Electric}");
+                    Console.WriteLine($"Spot {vehicle.ParkingSpot} {vehicle.RegNumber} {vehicle.Colour} {((Car)vehicle).Electric}");
                     //i++;
-                    motorcycleCount = 0;
+                    //motorcycleCount = 0;
                 }
                 else if (vehicle is Buss)
                 {
-                    Console.WriteLine($"Spot {i}-{i + 1} {vehicle.RegNumber} {vehicle.Colour} {((Buss)vehicle).AmountOfPassengers}");
+                    Console.WriteLine($"Spot {vehicle.ParkingSpot}-{vehicle.ParkingSpot + 1} {vehicle.RegNumber} {vehicle.Colour} {((Buss)vehicle).AmountOfPassengers}");
                     i++;
-                    motorcycleCount = 0;
+                    //motorcycleCount = 0;
                 }
                 else if(vehicle is Motorcycle)
                 {
-                    motorcycleCount++;
-                    currentAmountOfMC++;
-                    if (motorcycleCount == 2)
-                    {
-                        Console.WriteLine($"Spot {i - 1} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
-                        i--;
-                        motorcycleCount = 0;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Spot {i} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
+                    //motorcycleCount++;
+                    //currentAmountOfMC++;
+                    
+                    Console.WriteLine($"Spot {vehicle.ParkingSpot} {vehicle.RegNumber} {vehicle.Colour} {((Motorcycle)vehicle).KindOfMC}");
                         //i++;
-                    }
                 }
                 else
                 {
                     //i++;
                     Console.WriteLine($"Spot {i} empty");
                     //i--;
-                    motorcycleCount = 0;
+                    //motorcycleCount = 0;
                 }
                 //i++;
 
             }
-            for(; i < 15 + (Math.Round((currentAmountOfMC / 2),MidpointRounding.ToEven));)
-            {
-                i++;
-                Console.WriteLine($"Spot {i - (Math.Round((currentAmountOfMC / 2), MidpointRounding.ToEven))} empty");
-            }
+            //for(; i < 15 + (Math.Round((currentAmountOfMC / 2),MidpointRounding.ToEven));)
+            //{
+            //    i++;
+            //    Console.WriteLine($"Spot {i - (Math.Round((currentAmountOfMC / 2), MidpointRounding.ToEven))} empty");
+            //}
         }
     }
 }

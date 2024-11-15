@@ -43,34 +43,85 @@ namespace Deluxe_parking_lot
 
         public static int CheckAvailableSpots(ParkingLot parkingLot,Vehicle vehicle)
         {
-            int openSpot = 0;
+            int openSpot = 31;
+            double test = 0;
 
-            for (int i = 0; i < 30; i++)
+
+            if (vehicle is Car)
             {
 
-                if (vehicle is Car || (parkingLot.AvailableSpots[i] == 0 || parkingLot.AvailableSpots[i + 1] == 0))
+                for (int i = 0; i < 29; i++)
                 {
-                    openSpot = i;
-                    parkingLot.AvailableSpots[i] = i;
-                    parkingLot.AvailableSpots[i + 1] = i;
-                    break;
-                }
-                else if (vehicle is Motorcycle|| parkingLot.AvailableSpots[i] == 0)
-                {
-                    openSpot = i;
-                    parkingLot.AvailableSpots[i] = i;
-                    break;
-                }
-                else if (vehicle is Buss || (parkingLot.AvailableSpots[i] == 0 || parkingLot.AvailableSpots[i + 3] == 0))
-                {
-                    openSpot = i;
-                    for (int j = i; j < i + 3; j++)
+                    
+                    test = (i / 2);
+                    //Console.WriteLine(test);
+                    if ((parkingLot.AvailableSpots[i] == 0  && parkingLot.AvailableSpots[i + 1] == 0) && ((openSpot = (int)Math.Round(test)) != 0))
                     {
-                        parkingLot.AvailableSpots[j] = i;
+                        //Console.WriteLine((i / 2));
+                        openSpot = (i / 2);
+                        parkingLot.AvailableSpots[i] = i;
+                        parkingLot.AvailableSpots[i + 1] = i;
+                        return openSpot; 
                     }
-                    break;
-                } 
+                    else
+                    {
+                        openSpot = 1;
+                        //return openSpot;
+                    }
+                }
             }
+            else if (vehicle is Motorcycle)
+            {
+
+                for (int i = 0; i < 30; i++)
+                {
+                    if (parkingLot.AvailableSpots[i] == 0 && (openSpot = i / 2) != 0)
+                    {
+                        if((openSpot = i / 2) == 0)
+                        {
+                            openSpot = 1;
+                        }
+                        else if (parkingLot.AvailableSpots[i - 1] == parkingLot.AvailableSpots[i - 2])
+                        {
+                            openSpot = i / 2;
+                            parkingLot.AvailableSpots[i] = i;
+                        }
+                        else
+                        {
+                            openSpot = (i / 2);
+                            parkingLot.AvailableSpots[i] = i - 1;
+                        }
+                        return openSpot;
+                    }
+                    else
+                    {
+                        openSpot = 1;
+                        //return openSpot;
+                    }
+                    //break; 
+                }
+            }
+            else if (vehicle is Buss)
+            {
+                for (int i = 0; i < 27; i++)
+                {
+                    if ((parkingLot.AvailableSpots[i] == 0 && parkingLot.AvailableSpots[i + 3] == 0) && (openSpot = (i + 1) / 2) != 0)
+                    {
+                        openSpot = (i + 1) / 2;
+                        for (int j = i; j < i + 3; j++)
+                        {
+                            parkingLot.AvailableSpots[j] = i;
+                        }
+                        return openSpot;  
+                    }
+                    else
+                    {
+                        openSpot = 1;
+                        //return openSpot;
+                    }
+                }
+            }
+            //Console.WriteLine(openSpot);
             return openSpot;
         }
     }

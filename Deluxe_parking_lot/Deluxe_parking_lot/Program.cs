@@ -21,17 +21,18 @@ internal class MainProgram
                 case "T":
                     Console.Clear();
                     //Console.WriteLine($"{carA.RegNumber} {carA.Colour} {carA.Electric}");
-                    if(parking_lot.SizeOfParkingLot > helper.CurrentSize)
+                    if(parking_lot.SizeOfParkingLot > parking_lot.CurrentSize)
                     {
-                        helper.CreateVehicle(parking_lot);
+                        //helper.CreateVehicle(parking_lot);
+                        ParkingSystem.Park(parking_lot);
                         helper.DisplayCurrentLot(parking_lot);
-                        Console.WriteLine($"Parkinlot is this full {helper.CurrentSize}");
+                        Console.WriteLine($"Parkinlot is this full {parking_lot.CurrentSize}");
                     }
                     else
                     {
                         helper.CheckOut(parking_lot);
                         helper.DisplayCurrentLot(parking_lot);
-                        Console.WriteLine($"Parkinlot is full {helper.CurrentSize}");
+                        Console.WriteLine($"Parkinlot is full {parking_lot.CurrentSize}");
                     }
                     
                     break;
