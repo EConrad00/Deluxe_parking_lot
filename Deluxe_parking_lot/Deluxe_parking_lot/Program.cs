@@ -25,13 +25,13 @@ internal class MainProgram
                     {
                         //helper.CreateVehicle(parking_lot);
                         ParkingSystem.Park(parking_lot);
-                        helper.DisplayCurrentLot(parking_lot);
+                        Helper.DisplayCurrentLotV2(parking_lot);
                         Console.WriteLine($"Parkinlot is this full {parking_lot.CurrentSize}");
                     }
                     else
                     {
                         //helper.CheckOut(parking_lot);
-                        helper.DisplayCurrentLot(parking_lot);
+                        Helper.DisplayCurrentLotV2(parking_lot);
                         Console.WriteLine($"Parkinlot is full {parking_lot.CurrentSize}");
                     }
                     
