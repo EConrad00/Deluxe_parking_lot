@@ -14,7 +14,7 @@ internal class MainProgram
         ParkingLot parking_lot = new ParkingLot();
         while (true)
         {
-            Console.WriteLine("[T]Test code\r\n" + "[E]xit\r\n");
+            Console.WriteLine("[T]Time passes\r\n" + "[C]Checkout a vehicle\r\n" + "[E]xit\r\n");
             string key = Console.ReadKey().Key.ToString();
             switch (key) 
             {
@@ -35,6 +35,13 @@ internal class MainProgram
                         Console.WriteLine($"Parkinlot is full {parking_lot.CurrentSize}");
                     }
                     
+                    break;
+                case "C":
+                    string regNrFromAdmin = Console.ReadLine().ToUpper();
+                    ParkingSystem.CheckOut(parking_lot, regNrFromAdmin);
+                    Console.Clear();
+                    Helper.DisplayCurrentLotV2(parking_lot);
+                    Console.WriteLine($"Parkinlot is this full {parking_lot.CurrentSize}");
                     break;
                 case "E":
                     Console.Clear();

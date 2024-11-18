@@ -9,9 +9,33 @@ namespace Deluxe_parking_lot
 {
     internal class ParkingSystem
     {
-        public static void CheckOut()
+        public static void CheckOut(ParkingLot parkingLot, string vehicleToCheckOut)
         {
 
+            foreach (var currParkingSpot in parkingLot.AvailableSpotsV2.Keys)
+            {
+                parkingLot.AvailableSpotsV2.TryGetValue(currParkingSpot, out List<Vehicle> vehicles);
+
+                if (vehicles.Count != 0)
+                {
+                    foreach (var vehicle in vehicles)
+                    {
+                        if (vehicle.RegNumber == vehicleToCheckOut)
+                        {
+                            Console.WriteLine($"{vehicle.RegNumber} was checked out");
+                            parkingLot.CurrentSize -= vehicle.Size;
+                            vehicles.Remove(vehicle);
+                            break;
+                        }
+                    }
+                }
+                else 
+                {
+                    Console.WriteLine("Please write a valid regnumber");
+                    break;
+                }
+
+            }
         }
 
         public static void Park(ParkingLot parkingLot)
@@ -22,26 +46,36 @@ namespace Deluxe_parking_lot
             {
                 Car carA = new Car(Helper.CreateRegNumber(), "Red", false);
                 carA.ParkingSpot = CheckAvailableSpotsV2(parkingLot, carA);
-                parkingLot.Vehicles.Add(carA);
+                //parkingLot.Vehicles.Add(carA);
                 parkingLot.CurrentSize = (parkingLot.CurrentSize + carA.Size);
             }
             else if (rand == 1 && parkingLot.CurrentSize <= 13)
             {
                 Buss bussA = new Buss(Helper.CreateRegNumber(), "Blue", 43);
                 bussA.ParkingSpot = CheckAvailableSpotsV2(parkingLot, bussA);
-                parkingLot.Vehicles.Add(bussA);
+                //parkingLot.Vehicles.Add(bussA);
                 parkingLot.CurrentSize = (parkingLot.CurrentSize + bussA.Size);
             }
             else if (rand == 2)
             {
                 Motorcycle motorcycleA = new Motorcycle(Helper.CreateRegNumber(), "Grey", "Harley");
                 motorcycleA.ParkingSpot = CheckAvailableSpotsV2(parkingLot, motorcycleA);
-                parkingLot.Vehicles.Add(motorcycleA);
+                //parkingLot.Vehicles.Add(motorcycleA);
                 parkingLot.CurrentSize = (parkingLot.CurrentSize + motorcycleA.Size);
             }
             else
             {
-                //Write something about being unable to park such a big vehicle
+                // Move to display
+                string vehicle = "";
+                if (rand == 0) 
+                {
+                    vehicle = "car";
+                }
+                else
+                {
+                    vehicle = "buss";
+                }
+                Console.WriteLine($"There is not room for a {vehicle} of that size");
             }
         }
 
@@ -71,7 +105,7 @@ namespace Deluxe_parking_lot
                     isParkedHere = currParkingSpot - 1;
                     break;
                 }
-                else if (vehicle is Motorcycle)
+                else if (vehicle is Motorcycle) //Can be cleaned up, second if statement not neccesary
                 {
                     if (vehicles.Count == 1 && vehicles[0] is Motorcycle)
                     {
@@ -88,7 +122,6 @@ namespace Deluxe_parking_lot
                         break;
                     }
                 }
-                //i++;
             }
             return isParkedHere;
         }
