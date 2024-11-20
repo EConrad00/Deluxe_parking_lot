@@ -16,6 +16,8 @@ namespace Deluxe_parking_lot
 
         public int ParkingSpot { get; set; }
 
+        public double ParkingPrice { get; set; }
+
         public Vehicle(string regNumber, string colour/*, int parkingSpot*/) 
         {
             RegNumber = regNumber; 

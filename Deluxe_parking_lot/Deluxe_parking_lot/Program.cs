@@ -24,19 +24,26 @@ internal class MainProgram
                     if(parking_lot.SizeOfParkingLot > parking_lot.CurrentSize)
                     {
                         //helper.CreateVehicle(parking_lot);
-                        ParkingSystem.Park(parking_lot);
+                        Helper.DisplayCurrentLotV2(parking_lot);
+                        Helper.IncParkingPrice(parking_lot);
+                        ParkingSystem.Park(parking_lot, Helper.CreateVehicle());
+                        Console.Clear();
                         Helper.DisplayCurrentLotV2(parking_lot);
                         Console.WriteLine($"Parkinlot is this full {parking_lot.CurrentSize}");
                     }
                     else
                     {
                         //helper.CheckOut(parking_lot);
+                        Helper.IncParkingPrice(parking_lot);
                         Helper.DisplayCurrentLotV2(parking_lot);
                         Console.WriteLine($"Parkinlot is full {parking_lot.CurrentSize}");
                     }
                     
                     break;
                 case "C":
+                    Console.Clear();
+                    Helper.DisplayCurrentLotV2(parking_lot);
+                    Console.Write("Please write the regnumber of the vehicle you want to check out: ");
                     string regNrFromAdmin = Console.ReadLine().ToUpper();
                     ParkingSystem.CheckOut(parking_lot, regNrFromAdmin);
                     Console.Clear();
